@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrera Liebre tortuga</title>
+</head>
+<body>
+    <script>
+        class Dado {
+            arrojar(){
+                return Math.floor((Math.random()*100)+1);
+            }
+        }
+        class Liebre{
+            constructor(nombre){
+                this.nombre = nombre;
+                this.posicion=0;
+                this.dadoLiebre = new Dado();
+            }
+            saltar(){
+                let porcentaje = this.dadoLiebre.arrojar();
+                if(porcentaje <=20){
+                    this.posicion+=0;
+                }
+                else if(porcentaje<=40){
+                    this.posicion+=9;
+                }
+                else if(porcentaje<=50){
+                    this.posicion-=12;
+                }
+                else if(porcentaje<=85){
+                    this.posicion+=1;
+                }
+                else{
+                    this.posicion-=2;
+                }
+            }
+            info(){
+                return this.nombre + " está en la posición "+ this.posicion;
+            }
+
+        }
+        class Tortuga{
+            constructor(nombre){
+                this.nombre = nombre;
+                this.posicion = 0;
+                this.dadoTortuga= new Dado();
+            }
+            info(){
+                return this.nombre + " está en posición "+ this.posicion;
+            }
+            caminar(){
+                let porcentaje = this.dadoTortuga.arrojar();
+                if(porcentaje <=50){
+                    this.posicion+=3;
+                }
+                else if(porcentaje <=70){
+                    this.posicion-=6;
+                }
+                else{
+                    this.posicion+=1;
+                }
+            }
+
+        }
+        //let dadito = new Dado;
+        //console.log(dadito.arrojar());
+        let liebre = new Liebre("Liebre")
+        let tortu = new Tortuga("Tortuga");
+        let i = 0;
+        while(tortu.posicion <100 && liebre.posicion <100){
+            tortu.caminar();
+            liebre.saltar();
+            console.log(tortu.info()+ " mientras que "+liebre.info());
+            if(tortu.posicion >=100){
+                console.log("GANÓ "+ tortu.nombre);
+            }
+            if(liebre.posicion >=100){
+                console.log("GANÓ "+ liebre.nombre);
+            }
+            i++
+        }
+        //console.log("Dontelo tuvo "+i+" turnos");
+        //console.log("Rabbit tuvo tuvo "+i+" turnos");
+    </script>
+</body>
+</html>
